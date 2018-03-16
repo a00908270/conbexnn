@@ -16,3 +16,11 @@ spec:
         backend:
           serviceName: vinnsl-service
           servicePort: 8080
+      - path: /status
+        backend:
+          serviceName: vinnsl-service
+          servicePort: 8080
+      - path: /
+        backend:
+          serviceName: vinnsl-ui
+          servicePort: 8088
