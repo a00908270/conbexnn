@@ -20,6 +20,10 @@ spec:
         backend:
           serviceName: vinnsl-service
           servicePort: 8080
+      - path: /dl4j
+        backend:
+          serviceName: vinnsl-service
+          servicePort: 8080
       - path: /
         backend:
           serviceName: vinnsl-ui

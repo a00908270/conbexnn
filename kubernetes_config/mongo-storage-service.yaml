@@ -19,11 +19,11 @@ metadata:
   name: mongo-storage
 spec:
   serviceName: "mongo-storage"
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
-        role: mongo
+        role: mongo-storage
         environment: test
     spec:
       terminationGracePeriodSeconds: 10
@@ -32,8 +32,6 @@ spec:
           image: mongo
           command:
             - mongod
-            - "--replSet"
-            - rs1
             - "--bind_ip"
             - 0.0.0.0
             - "--noprealloc"
