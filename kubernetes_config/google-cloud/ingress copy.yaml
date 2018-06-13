@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: cluster-ingress
   annotations:
-    ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
   - http:
@@ -24,6 +24,18 @@ spec:
         backend:
           serviceName: vinnsl-service
           servicePort: 8080
+      - path: /worker
+        backend:
+          serviceName: vinnsl-nn-worker
+          servicePort: 8084
+      - path: /train
+        backend:
+          serviceName: vinnsl-nn-worker
+          servicePort: 9000
+      - path: /assets
+        backend:
+          serviceName: vinnsl-nn-worker
+          servicePort: 9000
       - path: /
         backend:
           serviceName: vinnsl-ui
