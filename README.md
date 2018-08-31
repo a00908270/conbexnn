@@ -5,7 +5,11 @@ This a project features web services to train and evaluate neural networks in th
 ![Screenshot VM](vm_small.jpg)
 See the project in Action by running the Demo virtual machine. 
 
-Format: OVA / 4.3 GB
+* Format: OVA
+* Size: 4.3 GB
+* System Lubuntu 18.04 64bit
+* Required RAM: 3GB
+* Required disk space: 15 GB
 
 Tested with VirtualBox 5.2.18 r124319 on macOS 10.13.6
 
