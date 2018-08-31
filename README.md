@@ -4,6 +4,8 @@ This a project features web services to train and evaluate neural networks in th
 ## Demo VM
 See the project in Action by running a virtual machine. It comes preconfigured with Kubernetes running all necessary ConbexNN services and a neural network training set for testing.
 
+![VM Screenshot](deploy/vm/img/vm_small.jpg)
+
 You can try out the RESTful API and GUI.
 
 * See [instructions here](/deploy/vm/)

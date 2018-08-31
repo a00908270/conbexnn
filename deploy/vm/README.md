@@ -1,5 +1,5 @@
 # Container Based Execution Stack for Neural Networks (ConbexNN)
-This a project features web services to train and evaluate neural networks in the cloud using the Kubernetes container orchestration and a Java based microservice architecture. 
+This a project features web services to train and evaluate neural networks using the Kubernetes container orchestration and a Java based microservice architecture. 
 
 ## Demo VM
 ![Screenshot VM](img/vm_small.jpg)See the project in Action by running a virtual machine. It comes preconfigured with Kubernetes running all necessary ConbexNN services and a neural network training set for testing.
