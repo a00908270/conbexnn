@@ -2,6 +2,7 @@
 This a project features web services to train and evaluate neural networks in the cloud using the Kubernetes container orchestration and a Java based microservice architecture. 
 
 ## Demo VM
+![Screenshot VM](vm_small.jpg)
 See the project in Action by running the Demo virtual machine. 
 
 Format: OVA
