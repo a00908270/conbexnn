@@ -49,6 +49,19 @@ Firefox is preinstalled and opens predefined Tabs
 * Swagger API (documentation of the ConbexNN RESTful interface)
 * Status Tab (shows status of imported neural networks)
 
+#### ConbexNN Endpoints
+
+https://localhost + endpoint
+
+| endpoint        | Service                           |
+| --------------- | --------------------------------- |
+| /#/             | Vinnsl NN UI                      |
+| /vinnsl         | Vinnsl Service                    |
+| /status         | Vinnsl NN Status                  |
+| /worker/queue   | Worker Queue                      |
+| /storage        | Storage Service                   |
+| /train/overview | DL4J Training UI (while training) |
+
 ### Postman
 
 ![Postman](img/postman.png)
