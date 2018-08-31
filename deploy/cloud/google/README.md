@@ -10,10 +10,16 @@ gcloud beta container --project "nn-cloud-201314" clusters create "cluster-1" --
 ```
 
 ### Setup Services
+
+$CONTEXT is you Google Container Context. For example: gke_nn-cloud-201314_us-central1-a_cluster-1
+
 ```
 kubectl --context $CONTEXT apply -f mongo_small.yaml
 kubectl --context $CONTEXT apply -f vinnsl-service.yaml
 kubectl --context $CONTEXT apply -f vinnsl-nn-ui.yaml
+kubectl --context $CONTEXT apply -f mongo-storage-service.yaml
+kubectl --context $CONTEXT apply -f vinnsl-storage-service.yaml
+kubectl --context $CONTEXT apply -f vinnsl-nn-worker.yaml
 ```
 
 ### Enable Service Discovery with Ingress
