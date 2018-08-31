@@ -3,7 +3,9 @@ This a project features web services to train and evaluate neural networks in th
 
 ## Demo VM
 See the project in Action by running the Demo virtual machine. 
+
 Format: OVA
+
 Tested with VirtualBox 5.2.18 r124319 on macOS 10.13.6
 
 
