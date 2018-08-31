@@ -11,6 +11,12 @@ You can try out the RESTful API and GUI.
 * See [instructions here](/deploy/vm/)
 
 ## Setup 
+
+### Setup on local machine with Docker Edge
+
+You can setup and run this project with Docker Edge and Kubernetes enabled
+See [instructions here](/deploy/local_dockerce/)
+
 ### Setup in Google Cloud Kubernetes Engine
 You can setup and run this project in Google Kubernetes Engine.
 See [instructions here](/deploy/cloud/google/)
