@@ -1,0 +1,42 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: cluster-ingress
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /storage
+        backend:
+          serviceName: vinnsl-storage-service
+          servicePort: 8081
+      - path: /vinnsl
+        backend:
+          serviceName: vinnsl-service
+          servicePort: 8080
+      - path: /status
+        backend:
+          serviceName: vinnsl-service
+          servicePort: 8080
+      - path: /dl4j
+        backend:
+          serviceName: vinnsl-service
+          servicePort: 8080
+      - path: /worker
+        backend:
+          serviceName: vinnsl-nn-worker
+          servicePort: 8084
+      - path: /train
+        backend:
+          serviceName: vinnsl-nn-worker
+          servicePort: 9000
+      - path: /assets
+        backend:
+          serviceName: vinnsl-nn-worker
+          servicePort: 9000
+      - path: /
+        backend:
+          serviceName: vinnsl-ui
+          servicePort: 8088

@@ -1,29 +1,14 @@
-# Container Based Execution Stack for Neural Networks
+# Container Based Execution Stack for Neural Networks (ConbexNN)
 This a project features web services to train and evaluate neural networks in the cloud using the Kubernetes container orchestration and a Java based microservice architecture. 
 
 ## Demo VM
-![Screenshot VM](vm_small.jpg)
-See the project in Action by running the Demo virtual machine. 
+See the project in Action by running a virtual machine. It comes preconfigured with Kubernetes running all necessary ConbexNN services and a neural network training set for testing.
 
-* Format: OVA
-* Size: 4.3 GB
-* System Lubuntu 18.04 64bit
-* Required RAM: 3GB
-* Required disk space: 15 GB
+You can try out the RESTful API and GUI.
 
-Tested with VirtualBox 5.2.18 r124319 on macOS 10.13.6
-
-### Download
-
-[Download here](https://conbexvm.blob.core.windows.net/conbexvm/ConbexNN.ova)
-
-### Import
-In VirtualBox click
-* File / Import Appliance
-* Select the .ova file and start the import
-* the machine can be started now
+* See [instructions here](/deploy/vm/)
 
 ## Setup 
 ### Setup in Google Cloud Kubernetes Engine
 You can setup and run this project in Google Kubernetes Engine.
-See [instructions here](/kubernetes_config/google-cloud)
+See [instructions here](/deploy/cloud/google/)
