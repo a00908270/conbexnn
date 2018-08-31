@@ -19,7 +19,7 @@ metadata:
   name: mongo
 spec:
   serviceName: "mongo"
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
@@ -32,8 +32,6 @@ spec:
           image: mongo
           command:
             - mongod
-            - "--replSet"
-            - rs0
             - "--bind_ip"
             - 0.0.0.0
             - "--smallfiles"
@@ -55,4 +53,4 @@ spec:
       accessModes: [ "ReadWriteOnce" ]
       resources:
         requests:
-          storage: 1Gi
+          storage: 0.5Gi
