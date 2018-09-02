@@ -50,8 +50,11 @@ kubectl apply -f ingress.yaml
 
 ## Usage
 
+![azure_console](img/azure_console.png)
+
 After a few minutes you can open the cluster ingress load balancer ip address to view the Vinnsl-NN-UI
 You can get the "EXTERNAL-IP" by executing
+
 ```
 kubectl get service -l app=nginx-ingress --namespace kube-system
 ```
