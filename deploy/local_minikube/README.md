@@ -63,11 +63,11 @@ You can get the address by executing
 ```
 minikube ip
 ```
-Open your Browser https://<minikubeip>/#/ to open Vinnsl-NN-UI.
+Open your Browser https://minikubeip/#/ to open Vinnsl-NN-UI.
 
 After successful setup should be able to open the following endpoints in your browser:
 
-https://<minikubeip> + endpoint
+https://minikubeip + endpoint
 
 | endpoint        | Service                           |
 | --------------- | --------------------------------- |

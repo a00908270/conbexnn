@@ -58,7 +58,7 @@ kubectl get service -l app=nginx-ingress --namespace kube-system
 
 After successful setup should be able to open the following endpoints in your browser:
 
-https://<ip-address>/#/ + endpoint
+https://ip-address/#/ + endpoint
 
 | endpoint        | Service                           |
 | --------------- | --------------------------------- |

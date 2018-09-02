@@ -37,7 +37,7 @@ kubectl --context $CONTEXT get ingress cluster-ingress
 
 After successful setup should be able to open the following endpoints in your browser:
 
-https://<ip-address>/#/ + endpoint
+https://ip-address/#/ + endpoint
 
 | endpoint        | Service                           |
 | --------------- | --------------------------------- |
