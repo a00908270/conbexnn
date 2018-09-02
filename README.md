@@ -28,12 +28,12 @@ See [instructions here](/deploy/local_minikube/)
 
 ### Cloud
 
-#### Setup in Google Cloud Kubernetes Engine
+#### Setup in Google Cloud
 
 You can setup and run this project in Google Kubernetes Engine.
 See [instructions here](/deploy/cloud/google/)
 
-#### Setup in Microsoft Azure Kubernetes Service
+#### Setup in Microsoft Azure
 
 You can setup and run this project in Microsoft Azure Kubernetes Service.
 See [instructions here](/deploy/cloud/azure/)
