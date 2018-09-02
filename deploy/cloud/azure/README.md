@@ -72,3 +72,15 @@ https://ip-address/#/ + endpoint
 | /storage        | Storage Service                   |
 | /train/overview | DL4J Training UI (while training) |
 
+## Additional Information
+
+### Enable Kubernetes Dashboard
+
+(Not possible via Cloud Shell. You must setup `az` cli on your local machine.) 
+
+```
+kubectl create clusterrolebinding kubernetes-dashboard --clusterrole=cluster-admin --serviceaccount=kube-system:kubernetes-dashboard
+#open kubernetes dashboard
+az aks browse --resource-group conbexnn --name conbexnnCluster
+```
+

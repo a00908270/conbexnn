@@ -1,0 +1,48 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: cluster-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    # type of authentication
+    nginx.ingress.kubernetes.io/auth-type: basic
+    # name of the secret that contains the user/password definitions
+    nginx.ingress.kubernetes.io/auth-secret: basic-auth
+    # message to display with an appropiate context why the authentication is required
+    nginx.ingress.kubernetes.io/auth-realm: "Authentication Required"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /vinnsl
+        backend:
+          serviceName: vinnsl-service
+          servicePort: 8080
+      - path: /status
+        backend:
+          serviceName: vinnsl-service
+          servicePort: 8080
+      - path: /dl4j
+        backend:
+          serviceName: vinnsl-service
+          servicePort: 8080
+      - path: /storage
+        backend:
+          serviceName: vinnsl-storage-service
+          servicePort: 8081
+      - path: /worker
+        backend:
+          serviceName: vinnsl-nn-worker
+          servicePort: 8084
+      - path: /train
+        backend:
+          serviceName: vinnsl-nn-worker
+          servicePort: 9000
+      - path: /assets
+        backend:
+          serviceName: vinnsl-nn-worker
+          servicePort: 9000
+      - path: /
+        backend:
+          serviceName: vinnsl-ui
+          servicePort: 8088
