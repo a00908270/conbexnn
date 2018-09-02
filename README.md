@@ -37,3 +37,8 @@ See [instructions here](/deploy/cloud/google/)
 
 You can setup and run this project in Microsoft Azure Kubernetes Service.
 See [instructions here](/deploy/cloud/azure/)
+
+#### Setup in Amazon EKS
+
+You can setup and run this project in Microsoft EKS
+This could not be tested, as billing must be enabled and EKS is not included in the AWS student program. Read the [amazon Documentation](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html) on how to deploy Kubernetes Clusters.
