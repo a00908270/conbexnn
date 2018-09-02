@@ -1,0 +1,95 @@
+---
+apiVersion: v1
+kind: List
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      fabric8.io/git-commit: 74417ab783ce52652fe192fa0132d88f45dbbac1
+      prometheus.io/port: "9779"
+      fabric8.io/scm-url: https://github.com/spring-projects/spring-boot/spring-boot-starter-parent/vinnsl-storage-service
+      fabric8.io/iconUrl: img/icons/spring-boot.svg
+      fabric8.io/git-branch: transformation-mongo-gridfs
+      prometheus.io/scrape: "true"
+      fabric8.io/scm-tag: HEAD
+    labels:
+      testProject: vinnsl-storage-service
+      app: vinnsl-storage-service
+      provider: fabric8
+      version: 1.0-SNAPSHOT
+      group: at.ac.univie.a00908270.nncloud
+    name: vinnsl-storage-service
+  spec:
+    ports:
+    - name: sunproxyadmin
+      port: 8081
+      protocol: TCP
+      targetPort: 8081
+    selector:
+      app: vinnsl-storage-service
+      provider: fabric8
+      group: at.ac.univie.a00908270.nncloud
+    type: NodePort
+- apiVersion: extensions/v1beta1
+  kind: Deployment
+  metadata:
+    annotations:
+      fabric8.io/git-commit: 74417ab783ce52652fe192fa0132d88f45dbbac1
+      fabric8.io/iconUrl: img/icons/spring-boot.svg
+      fabric8.io/git-branch: transformation-mongo-gridfs
+      fabric8.io/metrics-path: dashboard/file/kubernetes-pods.json/?var-project=vinnsl-storage-service&var-version=1.0-SNAPSHOT
+      fabric8.io/scm-tag: HEAD
+      fabric8.io/scm-url: https://github.com/spring-projects/spring-boot/spring-boot-starter-parent/vinnsl-storage-service
+    labels:
+      testProject: vinnsl-storage-service
+      app: vinnsl-storage-service
+      provider: fabric8
+      version: 1.0-SNAPSHOT
+      group: at.ac.univie.a00908270.nncloud
+    name: vinnsl-storage-service
+  spec:
+    replicas: 1
+    revisionHistoryLimit: 2
+    selector:
+      matchLabels:
+        app: vinnsl-storage-service
+        provider: fabric8
+        group: at.ac.univie.a00908270.nncloud
+    template:
+      metadata:
+        annotations:
+          fabric8.io/git-commit: 74417ab783ce52652fe192fa0132d88f45dbbac1
+          fabric8.io/metrics-path: dashboard/file/kubernetes-pods.json/?var-project=vinnsl-storage-service&var-version=1.0-SNAPSHOT
+          fabric8.io/scm-url: https://github.com/spring-projects/spring-boot/spring-boot-starter-parent/vinnsl-storage-service
+          fabric8.io/iconUrl: img/icons/spring-boot.svg
+          fabric8.io/git-branch: transformation-mongo-gridfs
+          fabric8.io/scm-tag: HEAD
+        labels:
+          testProject: vinnsl-storage-service
+          app: vinnsl-storage-service
+          provider: fabric8
+          version: 1.0-SNAPSHOT
+          group: at.ac.univie.a00908270.nncloud
+      spec:
+        containers:
+        - env:
+          - name: KUBERNETES_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          image: a00908270/vinnsl-storage-service:snapshot-180309-113151-0909
+          imagePullPolicy: IfNotPresent
+          name: spring-boot
+          ports:
+          - containerPort: 8081
+            name: sunproxyadmin
+            protocol: TCP
+          - containerPort: 9779
+            name: prometheus
+            protocol: TCP
+          - containerPort: 8778
+            name: jolokia
+            protocol: TCP
+          securityContext:
+            privileged: false
