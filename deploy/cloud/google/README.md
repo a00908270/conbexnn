@@ -1,5 +1,5 @@
 # Setting up in Google Cloud Kubernetes Engine
-## Prerequesites
+## Prerequisites
 - gcloud SDK locally installed (https://cloud.google.com/sdk/downloads)
 - kubectl installed (https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl)
 

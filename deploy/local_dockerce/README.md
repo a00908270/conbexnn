@@ -1,6 +1,6 @@
 # Setting up on local machine with Docker CE
 
-## Prerequesites
+## Prerequisites
 
 - Docker Edge (Kubernetes enabled)![docker-kub](img/docker-kub.png)
 

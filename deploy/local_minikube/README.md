@@ -1,5 +1,5 @@
 # Setting up on local machine with minikube
-## Prerequesites
+## Prerequisites
 
 - minikube installed (https://github.com/kubernetes/minikube/releases)
 - kubectl installed (https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl)

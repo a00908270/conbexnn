@@ -12,18 +12,28 @@ You can try out the RESTful API and GUI.
 
 ## Setup 
 
-### Setup on local machine with Docker Edge
+### Local
+
+#### Setup on local machine with Docker Edge
 
 Preferred if you have a Docker hypervisor compatible machine
 
 You can setup and run this project with Docker Edge and Kubernetes enabled
 See [instructions here](/deploy/local_dockerce/)
 
-### Setup on local machine with Minikube
+#### Setup on local machine with Minikube
 
 You can setup and run this project with the Minikube VM
 See [instructions here](/deploy/local_minikube/)
 
-### Setup in Google Cloud Kubernetes Engine
+### Cloud
+
+#### Setup in Google Cloud Kubernetes Engine
+
 You can setup and run this project in Google Kubernetes Engine.
 See [instructions here](/deploy/cloud/google/)
+
+#### Setup in Microsoft Azure Kubernetes Service
+
+You can setup and run this project in Microsoft Azure Kubernetes Service.
+See [instructions here](/deploy/cloud/azure/)
