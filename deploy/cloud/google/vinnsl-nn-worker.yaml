@@ -23,8 +23,13 @@ items:
   spec:
     ports:
     - port: 8084
+      name: nn-worker-rest
       protocol: TCP
       targetPort: 8084
+    - port: 9000
+      name: nn-worker-ui
+      protocol: TCP
+      targetPort: 9000
     selector:
       app: vinnsl-nn-worker
       provider: fabric8
