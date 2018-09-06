@@ -42,7 +42,8 @@ spec:
             - name: mongo-persistent-storage
               mountPath: /data/db
         - name: mongo-sidecar
-          image: cvallance/mongo-k8s-sidecar
+          image: a00908270/mongo-k8s-sidecar:latest
+          imagePullPolicy: IfNotPresent
           env:
             - name: MONGO_SIDECAR_POD_LABELS
               value: "role=mongo,environment=test"
