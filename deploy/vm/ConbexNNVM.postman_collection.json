@@ -1,0 +1,1402 @@
+{
+	"info": {
+		"_postman_id": "4ef34e80-f4c3-40ab-958f-979a0678e56e",
+		"name": "ConbexNN VM",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Use Case 1: Iris Classification",
+			"item": [
+				{
+					"name": "Create new Network (Description)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<vinnsl>\n  <description>\n    <identifier><!-- will be generated --></identifier>\n    <metadata>\n      <paradigm>classification</paradigm>\n      <name>Backpropagation Classification</name>\n      <description>Iris Classification Example</description>\n      <version>\n        <major>1</major>\n        <minor>0</minor>\n      </version>\n    </metadata>\n    <creator>\n      <name>Ronald Fisher</name>\n      <contact>ronald.fisher@institution.com</contact>\n    </creator>\n    <problemDomain>\n      <propagationType type=\"feedforward\">\n        <learningType>supervised</learningType>\n      </propagationType>\n      <applicationField>Classification</applicationField>\n      <networkType>Backpropagation</networkType>\n      <problemType>Classifiers</problemType>\n    </problemDomain>\n    <endpoints>\n      <train>true</train>\n      <retrain>true</retrain>\n      <evaluate>true</evaluate>\n    </endpoints>\n    <structure>\n\t   <input>\n\t    <ID>Input1</ID>\n\t    <size>\n\t    \t<min>4</min>\n\t    \t<max>4</max>\n\t    </size>\n\t   </input>\n\t   <hidden>\n\t    <ID>Hidden1</ID>\n\t    <size>\n\t    \t<min>3</min>\n\t    \t<max>3</max>\n\t    </size>\n\t   </hidden>\n\t   <hidden>\n\t    <ID>Hidden2</ID>\n\t    <size>\n\t    \t<min>3</min>\n\t    \t<max>3</max>\n\t    </size>\n\t   </hidden>\n\t   <output>\n\t    <ID>Output1</ID>\n\t    <size>\n\t    \t<min>3</min>\n\t    \t<max>3</max>\n\t    </size>\n\t   </output>\n\t </structure>\n\t <parameters>\n\t \t<!--<valueparameter>learningrate</valueparameter>\n\t \t<valueparameter>biasInput</valueparameter>\n\t \t<valueparameter>biasHidden</valueparameter>\n\t \t<valueparameter>momentum</valueparameter>\n\t \t<comboparameter>ativationfunction</valueparameter>\n\t \t<valueparameter>threshold</valueparameter>-->\n\t </parameters>\n\t <data>\n\t \t<description>iris txt file with 3 classifications, 4 input vars</description>\n\t \t<tabledescription>no input as table possible</tabledescription>\n\t \t<filedescription>CSV file</filedescription>\n\t </data>\n  </description>\n</vinnsl>"
+						},
+						"url": {
+							"raw": "{{cluster.protocol}}://{{cluster.ip}}/vinnsl/",
+							"protocol": "{{cluster.protocol}}",
+							"host": [
+								"{{cluster.ip}}"
+							],
+							"path": [
+								"vinnsl",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Definition to Vinnsl Network",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<definition>\n<identifier><!-- will be generated --></identifier>\n<metadata>\n  <paradigm>classification</paradigm>\n  <name>Backpropagation Classification</name>\n  <description>Iris Classification Example</description>\n  <version>\n    <major>1</major>\n    <minor>0</minor>\n  </version>\n</metadata>\n<creator>\n  <name>Ronald Fisher</name>\n  <contact>ronald.fisher@institution.com</contact>\n</creator>\n<problemDomain>\n  <propagationType type=\"feedforward\">\n    <learningType>supervised</learningType>\n  </propagationType>\n  <applicationField>Classification</applicationField>\n  <networkType>Backpropagation</networkType>\n  <problemType>Classifiers</problemType>\n</problemDomain>\n<endpoints>\n  <train>true</train>\n</endpoints>\n<executionEnvironment>\n\t<serial>true</serial>\n</executionEnvironment>\n<structure>\n   <input>\n    <ID>Input1</ID>\n    <size>4</size>\n   </input>\n   <hidden>\n    <ID>Hidden1</ID>\n    <size>3</size>\n   </hidden>\n   <hidden>\n    <ID>Hidden2</ID>\n    <size>3</size>\n   </hidden>\n   <output>\n    <ID>Output1</ID>\n    <size>3</size>\n   </output>\n   <connections>\n   \t<!--<fullconnected>\n   \t\t<fromblock>Input1</fromblock>\n   \t\t<toblock>Hidden1</toblock>\n   \t\t<fromblock>Hidden1</fromblock>\n   \t\t<toblock>Output1</toblock>\n   \t</fullconnected>-->\n   </connections>\n </structure>\n <resultSchema>\n \t<instance>true</instance>\n \t<training>true</training>\n </resultSchema>\n <parameters>\n \t<valueparameter name=\"learningrate\">0.1</valueparameter>\n\t<comboparameter name=\"activationfunction\">tanh</comboparameter>\n\t<valueparameter name=\"iterations\">500</valueparameter>\n\t<valueparameter name=\"seed\">6</valueparameter>\n\t<valueparameter name=\"labelIndex\">4</valueparameter>\n </parameters>\n <data>\n \t<description>iris txt file with 3 classifications, 4 input vars</description>\n\t<dataSchemaID>name/iris.txt</dataSchemaID>\n </data>\n</definition>"
+						},
+						"url": {
+							"raw": "{{cluster.protocol}}://{{cluster.ip}}/vinnsl/{{nn.id}}/definition",
+							"protocol": "{{cluster.protocol}}",
+							"host": [
+								"{{cluster.ip}}"
+							],
+							"path": [
+								"vinnsl",
+								"{{nn.id}}",
+								"definition"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Vinnsl XML by Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"disabled": true
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"identfier\": \"5a25767b29a0612c7a94a16e\",\n\"definition\": {\n\"identfier\": null,\n\"structure\": {\n\"input\": {\n\"id\": \"input1\",\n\"dimension\": 2,\n\"size\": 1\n},\n\"output\": {\n\"id\": \"output1\",\n\"dimension\": 1,\n\"size\": 1\n},\n\"hidden\": {\n\"id\": \"hidden1\",\n\"dimension\": 5,\n\"size\": 1\n},\n\"connections\": \"connections\"\n},\n\"parameters\": {\n\"parameters\": [\n{\n\"name\": \"test\",\n\"label\": \"test1\",\n\"value\": \"value\",\n\"_class\": \"at.ac.univie.a0908270.nncloud.db.parameters.ValueParameter\"\n},\n{\n\"name\": \"test2\",\n\"label\": \"testlabel\",\n\"value\": false,\n\"_class\": \"at.ac.univie.a0908270.nncloud.db.parameters.ValueParameter\"\n}\n]\n}\n},\n\"description\": null,\n\"data\": null,\n\"instance\": null,\n\"result\": null\n}"
+						},
+						"url": {
+							"raw": "{{cluster.protocol}}://{{cluster.ip}}/vinnsl/{{nn.id}}",
+							"protocol": "{{cluster.protocol}}",
+							"host": [
+								"{{cluster.ip}}"
+							],
+							"path": [
+								"vinnsl",
+								"{{nn.id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Start Training Network",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{cluster.protocol}}://{{cluster.ip}}/worker/queue/{{nn.id}}/",
+							"protocol": "{{cluster.protocol}}",
+							"host": [
+								"{{cluster.ip}}"
+							],
+							"path": [
+								"worker",
+								"queue",
+								"{{nn.id}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Training Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{cluster.protocol}}://{{cluster.ip}}/status/",
+							"protocol": "{{cluster.protocol}}",
+							"host": [
+								"{{cluster.ip}}"
+							],
+							"path": [
+								"status",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Extract Result File ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e928291e-2b7c-491d-beb1-9661a2d66c00",
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData =JSON.parse(responseBody);",
+									"var resultFileId = jsonData.result.file;",
+									"console.log(resultFileId);",
+									"postman.setEnvironmentVariable(\"nn.resultfile.id\", resultFileId);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"disabled": true
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"identfier\": \"5a25767b29a0612c7a94a16e\",\n\"definition\": {\n\"identfier\": null,\n\"structure\": {\n\"input\": {\n\"id\": \"input1\",\n\"dimension\": 2,\n\"size\": 1\n},\n\"output\": {\n\"id\": \"output1\",\n\"dimension\": 1,\n\"size\": 1\n},\n\"hidden\": {\n\"id\": \"hidden1\",\n\"dimension\": 5,\n\"size\": 1\n},\n\"connections\": \"connections\"\n},\n\"parameters\": {\n\"parameters\": [\n{\n\"name\": \"test\",\n\"label\": \"test1\",\n\"value\": \"value\",\n\"_class\": \"at.ac.univie.a0908270.nncloud.db.parameters.ValueParameter\"\n},\n{\n\"name\": \"test2\",\n\"label\": \"testlabel\",\n\"value\": false,\n\"_class\": \"at.ac.univie.a0908270.nncloud.db.parameters.ValueParameter\"\n}\n]\n}\n},\n\"description\": null,\n\"data\": null,\n\"instance\": null,\n\"result\": null\n}"
+						},
+						"url": {
+							"raw": "{{cluster.protocol}}://{{cluster.ip}}/vinnsl/{{nn.id}}",
+							"protocol": "{{cluster.protocol}}",
+							"host": [
+								"{{cluster.ip}}"
+							],
+							"path": [
+								"vinnsl",
+								"{{nn.id}}"
+							]
+						},
+						"description": "This script looks at the result schema and extracts the result file id"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Training Result File",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "792e7cca-9c9b-4f33-b74f-7e66fbb7402f",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"disabled": true
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"identfier\": \"5a25767b29a0612c7a94a16e\",\n\"definition\": {\n\"identfier\": null,\n\"structure\": {\n\"input\": {\n\"id\": \"input1\",\n\"dimension\": 2,\n\"size\": 1\n},\n\"output\": {\n\"id\": \"output1\",\n\"dimension\": 1,\n\"size\": 1\n},\n\"hidden\": {\n\"id\": \"hidden1\",\n\"dimension\": 5,\n\"size\": 1\n},\n\"connections\": \"connections\"\n},\n\"parameters\": {\n\"parameters\": [\n{\n\"name\": \"test\",\n\"label\": \"test1\",\n\"value\": \"value\",\n\"_class\": \"at.ac.univie.a0908270.nncloud.db.parameters.ValueParameter\"\n},\n{\n\"name\": \"test2\",\n\"label\": \"testlabel\",\n\"value\": false,\n\"_class\": \"at.ac.univie.a0908270.nncloud.db.parameters.ValueParameter\"\n}\n]\n}\n},\n\"description\": null,\n\"data\": null,\n\"instance\": null,\n\"result\": null\n}"
+						},
+						"url": {
+							"raw": "{{cluster.protocol}}://{{cluster.ip}}/storage/files/{{nn.resultfile.id}}?download=false",
+							"protocol": "{{cluster.protocol}}",
+							"host": [
+								"{{cluster.ip}}"
+							],
+							"path": [
+								"storage",
+								"files",
+								"{{nn.resultfile.id}}"
+							],
+							"query": [
+								{
+									"key": "download",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "904802ea-d219-4cd3-bc9d-dc3a18a7a38f",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "8a04596c-e745-48ab-bad5-d50b17f63f53",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Use Case 2: Wine Score Classification",
+			"item": [
+				{
+					"name": "Create new Network (Description)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<vinnsl>\n  <description>\n    <identifier><!-- will be generated --></identifier>\n    <metadata>\n      <paradigm>classification</paradigm>\n      <name>Backpropagation Classification</name>\n      <description>Wine Classification Example</description>\n      <version>\n        <major>1</major>\n        <minor>0</minor>\n      </version>\n    </metadata>\n    <creator>\n      <name>Nussbaum</name>\n      <contact>nussbaum@institution.com</contact>\n    </creator>\n    <problemDomain>\n      <propagationType type=\"feedforward\">\n        <learningType>supervised</learningType>\n      </propagationType>\n      <applicationField>Classification</applicationField>\n      <networkType>Backpropagation</networkType>\n      <problemType>Classifiers</problemType>\n    </problemDomain>\n    <endpoints>\n      <train>true</train>\n      <retrain>true</retrain>\n      <evaluate>true</evaluate>\n    </endpoints>\n    <structure>\n\t   <input>\n\t    <ID>Input1</ID>\n\t    <size>\n\t    \t<min>2</min>\n\t    \t<max>2</max>\n\t    </size>\n\t   </input>\n\t   <hidden>\n\t    <ID>Hidden1</ID>\n\t    <size>\n\t    \t<min>3</min>\n\t    \t<max>3</max>\n\t    </size>\n\t   </hidden>\n\t   <hidden>\n\t    <ID>Hidden2</ID>\n\t    <size>\n\t    \t<min>3</min>\n\t    \t<max>3</max>\n\t    </size>\n\t   </hidden>\n\t   <output>\n\t    <ID>Output1</ID>\n\t    <size>\n\t    \t<min>2</min>\n\t    \t<max>2</max>\n\t    </size>\n\t   </output>\n\t </structure>\n\t <!--<parameters>\n\t \t<valueparameter>learningrate</valueparameter>\n\t \t<valueparameter>biasInput</valueparameter>\n\t \t<valueparameter>biasHidden</valueparameter>\n\t \t<valueparameter>momentum</valueparameter>\n\t \t<comboparameter>ativationfunction</comboparameter>\n\t \t<valueparameter>threshold</valueparameter>\n\t </parameters>-->\n\t <data>\n\t \t<description>wine csv file with 2 classifications, \n\t \t2 input vars</description>\n\t \t<tabledescription>no input as table possible</tabledescription>\n\t \t<filedescription>CSV file</filedescription>\n\t </data>\n  </description>\n</vinnsl>"
+						},
+						"url": {
+							"raw": "{{cluster.protocol}}://{{cluster.ip}}/vinnsl/",
+							"protocol": "{{cluster.protocol}}",
+							"host": [
+								"{{cluster.ip}}"
+							],
+							"path": [
+								"vinnsl",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Definition to Vinnsl Network",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<definition>\n<identifier><!-- will be generated --></identifier>\n<metadata>\n  <paradigm>classification</paradigm>\n   <name>Backpropagation Classification</name>\n   <description>Wine Classification Example</description>\n  <version>\n    <major>1</major>\n    <minor>0</minor>\n  </version>\n</metadata>\n<creator>\n  <name>Nussbaum</name>\n  <contact>nussbaum@institution.com</contact>\n</creator>\n<problemDomain>\n  <propagationType type=\"feedforward\">\n    <learningType>supervised</learningType>\n  </propagationType>\n  <applicationField>Classification</applicationField>\n  <networkType>Backpropagation</networkType>\n  <problemType>Classifiers</problemType>\n</problemDomain>\n<endpoints>\n  <train>true</train>\n</endpoints>\n<executionEnvironment>\n\t<serial>true</serial>\n</executionEnvironment>\n<structure>\n   <input>\n    <ID>Input1</ID>\n    <size>2</size>\n   </input>\n   <hidden>\n    <ID>Hidden1</ID>\n    <size>3</size>\n   </hidden>\n   <hidden>\n    <ID>Hidden2</ID>\n    <size>3</size>\n   </hidden>\n   <output>\n    <ID>Output1</ID>\n    <size>2</size>\n   </output>\n   <connections>\n   \t<!--<fullconnected>\n   \t\t<fromblock>Input1</fromblock>\n   \t\t<toblock>Hidden1</toblock>\n   \t\t<fromblock>Hidden1</fromblock>\n   \t\t<toblock>Output1</toblock>\n   \t</fullconnected>-->\n   </connections>\n </structure>\n <resultSchema>\n \t<instance>true</instance>\n \t<training>true</training>\n </resultSchema>\n <parameters>\n \t<valueparameter name=\"learningrate\">0.1</valueparameter>\n\t<comboparameter name=\"activationfunction\">tanh</comboparameter>\n\t<valueparameter name=\"iterations\">500</valueparameter>\n\t<valueparameter name=\"seed\">6</valueparameter>\n </parameters>\n <data>\n \t<description>wine csv file with 2 classifications,\n    2 input vars</description>\n\t<dataSchemaID>name/wines.csv</dataSchemaID>\n </data>\n</definition>"
+						},
+						"url": {
+							"raw": "{{cluster.protocol}}://{{cluster.ip}}/vinnsl/{{nn.id}}/definition",
+							"protocol": "{{cluster.protocol}}",
+							"host": [
+								"{{cluster.ip}}"
+							],
+							"path": [
+								"vinnsl",
+								"{{nn.id}}",
+								"definition"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Vinnsl XML by Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"disabled": true
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"identfier\": \"5a25767b29a0612c7a94a16e\",\n\"definition\": {\n\"identfier\": null,\n\"structure\": {\n\"input\": {\n\"id\": \"input1\",\n\"dimension\": 2,\n\"size\": 1\n},\n\"output\": {\n\"id\": \"output1\",\n\"dimension\": 1,\n\"size\": 1\n},\n\"hidden\": {\n\"id\": \"hidden1\",\n\"dimension\": 5,\n\"size\": 1\n},\n\"connections\": \"connections\"\n},\n\"parameters\": {\n\"parameters\": [\n{\n\"name\": \"test\",\n\"label\": \"test1\",\n\"value\": \"value\",\n\"_class\": \"at.ac.univie.a0908270.nncloud.db.parameters.ValueParameter\"\n},\n{\n\"name\": \"test2\",\n\"label\": \"testlabel\",\n\"value\": false,\n\"_class\": \"at.ac.univie.a0908270.nncloud.db.parameters.ValueParameter\"\n}\n]\n}\n},\n\"description\": null,\n\"data\": null,\n\"instance\": null,\n\"result\": null\n}"
+						},
+						"url": {
+							"raw": "{{cluster.protocol}}://{{cluster.ip}}/vinnsl/{{nn.id}}",
+							"protocol": "{{cluster.protocol}}",
+							"host": [
+								"{{cluster.ip}}"
+							],
+							"path": [
+								"vinnsl",
+								"{{nn.id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Start Training Network",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{cluster.protocol}}://{{cluster.ip}}/worker/queue/{{nn.id}}/",
+							"protocol": "{{cluster.protocol}}",
+							"host": [
+								"{{cluster.ip}}"
+							],
+							"path": [
+								"worker",
+								"queue",
+								"{{nn.id}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Training Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{cluster.protocol}}://{{cluster.ip}}/status/",
+							"protocol": "{{cluster.protocol}}",
+							"host": [
+								"{{cluster.ip}}"
+							],
+							"path": [
+								"status",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Extract Result File ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e928291e-2b7c-491d-beb1-9661a2d66c00",
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData =JSON.parse(responseBody);",
+									"var resultFileId = jsonData.result.file;",
+									"console.log(resultFileId);",
+									"postman.setEnvironmentVariable(\"nn.resultfile.id\", resultFileId);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"disabled": true
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"identfier\": \"5a25767b29a0612c7a94a16e\",\n\"definition\": {\n\"identfier\": null,\n\"structure\": {\n\"input\": {\n\"id\": \"input1\",\n\"dimension\": 2,\n\"size\": 1\n},\n\"output\": {\n\"id\": \"output1\",\n\"dimension\": 1,\n\"size\": 1\n},\n\"hidden\": {\n\"id\": \"hidden1\",\n\"dimension\": 5,\n\"size\": 1\n},\n\"connections\": \"connections\"\n},\n\"parameters\": {\n\"parameters\": [\n{\n\"name\": \"test\",\n\"label\": \"test1\",\n\"value\": \"value\",\n\"_class\": \"at.ac.univie.a0908270.nncloud.db.parameters.ValueParameter\"\n},\n{\n\"name\": \"test2\",\n\"label\": \"testlabel\",\n\"value\": false,\n\"_class\": \"at.ac.univie.a0908270.nncloud.db.parameters.ValueParameter\"\n}\n]\n}\n},\n\"description\": null,\n\"data\": null,\n\"instance\": null,\n\"result\": null\n}"
+						},
+						"url": {
+							"raw": "{{cluster.protocol}}://{{cluster.ip}}/vinnsl/{{nn.id}}",
+							"protocol": "{{cluster.protocol}}",
+							"host": [
+								"{{cluster.ip}}"
+							],
+							"path": [
+								"vinnsl",
+								"{{nn.id}}"
+							]
+						},
+						"description": "This script looks at the result schema and extracts the result file id"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Training Result File",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "792e7cca-9c9b-4f33-b74f-7e66fbb7402f",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"disabled": true
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"identfier\": \"5a25767b29a0612c7a94a16e\",\n\"definition\": {\n\"identfier\": null,\n\"structure\": {\n\"input\": {\n\"id\": \"input1\",\n\"dimension\": 2,\n\"size\": 1\n},\n\"output\": {\n\"id\": \"output1\",\n\"dimension\": 1,\n\"size\": 1\n},\n\"hidden\": {\n\"id\": \"hidden1\",\n\"dimension\": 5,\n\"size\": 1\n},\n\"connections\": \"connections\"\n},\n\"parameters\": {\n\"parameters\": [\n{\n\"name\": \"test\",\n\"label\": \"test1\",\n\"value\": \"value\",\n\"_class\": \"at.ac.univie.a0908270.nncloud.db.parameters.ValueParameter\"\n},\n{\n\"name\": \"test2\",\n\"label\": \"testlabel\",\n\"value\": false,\n\"_class\": \"at.ac.univie.a0908270.nncloud.db.parameters.ValueParameter\"\n}\n]\n}\n},\n\"description\": null,\n\"data\": null,\n\"instance\": null,\n\"result\": null\n}"
+						},
+						"url": {
+							"raw": "{{cluster.protocol}}://{{cluster.ip}}/storage/files/{{nn.resultfile.id}}?download=false",
+							"protocol": "{{cluster.protocol}}",
+							"host": [
+								"{{cluster.ip}}"
+							],
+							"path": [
+								"storage",
+								"files",
+								"{{nn.resultfile.id}}"
+							],
+							"query": [
+								{
+									"key": "download",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "904802ea-d219-4cd3-bc9d-dc3a18a7a38f",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "8a04596c-e745-48ab-bad5-d50b17f63f53",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Use Case 3: MNIST Digit Recognition",
+			"item": [
+				{
+					"name": "Create new Network (Description)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<vinnsl>\n  <description>\n    <identifier><!-- will be generated --></identifier>\n    <metadata>\n      <paradigm>Deep Learning</paradigm>\n      <name>MNIST Digit Recognition</name>\n      <description>MNIST Digit Recognition Example</description>\n      <version>\n        <major>1</major>\n        <minor>0</minor>\n      </version>\n    </metadata>\n    <creator>\n      <name>Author</name>\n      <contact>author@institution.com</contact>\n    </creator>\n    <problemDomain>\n      <propagationType type=\"feedforward\">\n        <learningType>supervised</learningType>\n      </propagationType>\n      <applicationField>DeepLearning</applicationField>\n      <networkType>Backpropagation</networkType>\n      <problemType>DeepLearning</problemType>\n    </problemDomain>\n    <endpoints>\n      <train>true</train>\n      <retrain>true</retrain>\n      <evaluate>true</evaluate>\n    </endpoints>\n    <structure>\n\t   <input>\n\t    <ID>Input1</ID>\n\t    <size>\n\t    \t<min>784</min>\n\t    \t<max>784</max>\n\t    </size>\n\t   </input>\n\t   <hidden>\n\t    <ID>DenseLayer</ID>\n\t    <size>\n\t    \t<min>1000</min>\n\t    \t<max>1000</max>\n\t    </size>\n\t   </hidden>\n\t   <output>\n\t    <ID>Output1</ID>\n\t    <size>\n\t    \t<min>10</min>\n\t    \t<max>10</max>\n\t    </size>\n\t   </output>\n\t </structure>\n\t <parameters>\n\t </parameters>\n\t <data>\n\t </data>\n  </description>\n</vinnsl>"
+						},
+						"url": {
+							"raw": "{{cluster.protocol}}://{{cluster.ip}}/vinnsl/",
+							"protocol": "{{cluster.protocol}}",
+							"host": [
+								"{{cluster.ip}}"
+							],
+							"path": [
+								"vinnsl",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Definition to Vinnsl Network",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<definition>\n<identifier><!-- will be generated --></identifier>\n<metadata>\n  <paradigm>Deep Learning</paradigm>\n  <name>MNIST Digit Recognition</name>\n  <description>MNIST Digit Recognition Example</description>\n  <version>\n    <major>1</major>\n    <minor>0</minor>\n  </version>\n</metadata>\n<creator>\n  <name>Author</name>\n  <contact>author@institution.com</contact>\n</creator>\n<problemDomain>\n  <propagationType type=\"feedforward\">\n    <learningType>supervised</learningType>\n  </propagationType>\n  <applicationField>Deep Learning</applicationField>\n  <networkType>Backpropagation</networkType>\n  <problemType>Deep Learning</problemType>\n</problemDomain>\n<endpoints>\n  <train>true</train>\n</endpoints>\n<executionEnvironment>\n\t<serial>true</serial>\n</executionEnvironment>\n<structure>\n   <input>\n    <ID>Input1</ID>\n    <size>784</size>\n   </input>\n   <hidden>\n    <ID>DenseLayer</ID>\n    <size>1000</size>\n   </hidden>\n   <output>\n    <ID>Output1</ID>\n    <size>10</size>\n   </output>\n   <connections>\n   \t<!--<fullconnected>\n   \t\t<fromblock>Input1</fromblock>\n   \t\t<toblock>DenseLayer</toblock>\n   \t\t<fromblock>DenseLayer</fromblock>\n   \t\t<toblock>Output1</toblock>\n   \t</fullconnected>-->\n   </connections>\n </structure>\n <resultSchema>\n \t<instance>true</instance>\n \t<training>true</training>\n </resultSchema>\n <parameters>\n \t<valueparameter name=\"learningrate\">0.006</valueparameter>\n\t<valueparameter name=\"epochs\">15</valueparameter>\n\t<valueparameter name=\"seed\">123</valueparameter>\n\t<valueparameter name=\"momentum\">0.9</valueparameter>\n\t<comboparameter name=\"dl4jTrainerClass\">at.ac.univie.a00908270.nnworker.dl4j.Dl4jMnistNetworkTrainer</comboparameter>\n </parameters>\n <data>\n \t<description>DL4J MNIST Dataset</description>\n </data>\n</definition>"
+						},
+						"url": {
+							"raw": "{{cluster.protocol}}://{{cluster.ip}}/vinnsl/{{nn.id}}/definition",
+							"protocol": "{{cluster.protocol}}",
+							"host": [
+								"{{cluster.ip}}"
+							],
+							"path": [
+								"vinnsl",
+								"{{nn.id}}",
+								"definition"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Vinnsl XML by Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"disabled": true
+							},
+							{
+								"key": "Accept",
+								"value": "application/xml"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"identfier\": \"5a25767b29a0612c7a94a16e\",\n\"definition\": {\n\"identfier\": null,\n\"structure\": {\n\"input\": {\n\"id\": \"input1\",\n\"dimension\": 2,\n\"size\": 1\n},\n\"output\": {\n\"id\": \"output1\",\n\"dimension\": 1,\n\"size\": 1\n},\n\"hidden\": {\n\"id\": \"hidden1\",\n\"dimension\": 5,\n\"size\": 1\n},\n\"connections\": \"connections\"\n},\n\"parameters\": {\n\"parameters\": [\n{\n\"name\": \"test\",\n\"label\": \"test1\",\n\"value\": \"value\",\n\"_class\": \"at.ac.univie.a0908270.nncloud.db.parameters.ValueParameter\"\n},\n{\n\"name\": \"test2\",\n\"label\": \"testlabel\",\n\"value\": false,\n\"_class\": \"at.ac.univie.a0908270.nncloud.db.parameters.ValueParameter\"\n}\n]\n}\n},\n\"description\": null,\n\"data\": null,\n\"instance\": null,\n\"result\": null\n}"
+						},
+						"url": {
+							"raw": "{{cluster.protocol}}://{{cluster.ip}}/vinnsl/{{nn.id}}",
+							"protocol": "{{cluster.protocol}}",
+							"host": [
+								"{{cluster.ip}}"
+							],
+							"path": [
+								"vinnsl",
+								"{{nn.id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Start Training Network",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{cluster.protocol}}://{{cluster.ip}}/worker/queue/{{nn.id}}/",
+							"protocol": "{{cluster.protocol}}",
+							"host": [
+								"{{cluster.ip}}"
+							],
+							"path": [
+								"worker",
+								"queue",
+								"{{nn.id}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Training Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{cluster.protocol}}://{{cluster.ip}}/status/",
+							"protocol": "{{cluster.protocol}}",
+							"host": [
+								"{{cluster.ip}}"
+							],
+							"path": [
+								"status",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Extract Result File ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e928291e-2b7c-491d-beb1-9661a2d66c00",
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData =JSON.parse(responseBody);",
+									"var resultFileId = jsonData.result.file;",
+									"console.log(resultFileId);",
+									"postman.setEnvironmentVariable(\"nn.resultfile.id\", resultFileId);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"disabled": true
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"identfier\": \"5a25767b29a0612c7a94a16e\",\n\"definition\": {\n\"identfier\": null,\n\"structure\": {\n\"input\": {\n\"id\": \"input1\",\n\"dimension\": 2,\n\"size\": 1\n},\n\"output\": {\n\"id\": \"output1\",\n\"dimension\": 1,\n\"size\": 1\n},\n\"hidden\": {\n\"id\": \"hidden1\",\n\"dimension\": 5,\n\"size\": 1\n},\n\"connections\": \"connections\"\n},\n\"parameters\": {\n\"parameters\": [\n{\n\"name\": \"test\",\n\"label\": \"test1\",\n\"value\": \"value\",\n\"_class\": \"at.ac.univie.a0908270.nncloud.db.parameters.ValueParameter\"\n},\n{\n\"name\": \"test2\",\n\"label\": \"testlabel\",\n\"value\": false,\n\"_class\": \"at.ac.univie.a0908270.nncloud.db.parameters.ValueParameter\"\n}\n]\n}\n},\n\"description\": null,\n\"data\": null,\n\"instance\": null,\n\"result\": null\n}"
+						},
+						"url": {
+							"raw": "{{cluster.protocol}}://{{cluster.ip}}/vinnsl/{{nn.id}}",
+							"protocol": "{{cluster.protocol}}",
+							"host": [
+								"{{cluster.ip}}"
+							],
+							"path": [
+								"vinnsl",
+								"{{nn.id}}"
+							]
+						},
+						"description": "This script looks at the result schema and extracts the result file id"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Training Result File",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "792e7cca-9c9b-4f33-b74f-7e66fbb7402f",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"disabled": true
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"identfier\": \"5a25767b29a0612c7a94a16e\",\n\"definition\": {\n\"identfier\": null,\n\"structure\": {\n\"input\": {\n\"id\": \"input1\",\n\"dimension\": 2,\n\"size\": 1\n},\n\"output\": {\n\"id\": \"output1\",\n\"dimension\": 1,\n\"size\": 1\n},\n\"hidden\": {\n\"id\": \"hidden1\",\n\"dimension\": 5,\n\"size\": 1\n},\n\"connections\": \"connections\"\n},\n\"parameters\": {\n\"parameters\": [\n{\n\"name\": \"test\",\n\"label\": \"test1\",\n\"value\": \"value\",\n\"_class\": \"at.ac.univie.a0908270.nncloud.db.parameters.ValueParameter\"\n},\n{\n\"name\": \"test2\",\n\"label\": \"testlabel\",\n\"value\": false,\n\"_class\": \"at.ac.univie.a0908270.nncloud.db.parameters.ValueParameter\"\n}\n]\n}\n},\n\"description\": null,\n\"data\": null,\n\"instance\": null,\n\"result\": null\n}"
+						},
+						"url": {
+							"raw": "{{cluster.protocol}}://{{cluster.ip}}/storage/files/{{nn.resultfile.id}}?download=false",
+							"protocol": "{{cluster.protocol}}",
+							"host": [
+								"{{cluster.ip}}"
+							],
+							"path": [
+								"storage",
+								"files",
+								"{{nn.resultfile.id}}"
+							],
+							"query": [
+								{
+									"key": "download",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "904802ea-d219-4cd3-bc9d-dc3a18a7a38f",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "8a04596c-e745-48ab-bad5-d50b17f63f53",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "General Requests",
+			"item": [
+				{
+					"name": "Vinnsl Service",
+					"item": [
+						{
+							"name": "Get All Vinnsl JSON",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"disabled": true
+									},
+									{
+										"key": "Accept",
+										"value": "application/xml",
+										"disabled": true
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"identfier\": \"5a25767b29a0612c7a94a16e\",\n\"definition\": {\n\"identfier\": null,\n\"structure\": {\n\"input\": {\n\"id\": \"input1\",\n\"dimension\": 2,\n\"size\": 1\n},\n\"output\": {\n\"id\": \"output1\",\n\"dimension\": 1,\n\"size\": 1\n},\n\"hidden\": {\n\"id\": \"hidden1\",\n\"dimension\": 5,\n\"size\": 1\n},\n\"connections\": \"connections\"\n},\n\"parameters\": {\n\"parameters\": [\n{\n\"name\": \"test\",\n\"label\": \"test1\",\n\"value\": \"value\",\n\"_class\": \"at.ac.univie.a0908270.nncloud.db.parameters.ValueParameter\"\n},\n{\n\"name\": \"test2\",\n\"label\": \"testlabel\",\n\"value\": false,\n\"_class\": \"at.ac.univie.a0908270.nncloud.db.parameters.ValueParameter\"\n}\n]\n}\n},\n\"description\": null,\n\"data\": null,\n\"instance\": null,\n\"result\": null\n}"
+								},
+								"url": {
+									"raw": "{{cluster.protocol}}://{{cluster.ip}}/vinnsl/",
+									"protocol": "{{cluster.protocol}}",
+									"host": [
+										"{{cluster.ip}}"
+									],
+									"path": [
+										"vinnsl",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Vinnsl XML by Id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"disabled": true
+									},
+									{
+										"key": "Accept",
+										"value": "application/xml"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"identfier\": \"5a25767b29a0612c7a94a16e\",\n\"definition\": {\n\"identfier\": null,\n\"structure\": {\n\"input\": {\n\"id\": \"input1\",\n\"dimension\": 2,\n\"size\": 1\n},\n\"output\": {\n\"id\": \"output1\",\n\"dimension\": 1,\n\"size\": 1\n},\n\"hidden\": {\n\"id\": \"hidden1\",\n\"dimension\": 5,\n\"size\": 1\n},\n\"connections\": \"connections\"\n},\n\"parameters\": {\n\"parameters\": [\n{\n\"name\": \"test\",\n\"label\": \"test1\",\n\"value\": \"value\",\n\"_class\": \"at.ac.univie.a0908270.nncloud.db.parameters.ValueParameter\"\n},\n{\n\"name\": \"test2\",\n\"label\": \"testlabel\",\n\"value\": false,\n\"_class\": \"at.ac.univie.a0908270.nncloud.db.parameters.ValueParameter\"\n}\n]\n}\n},\n\"description\": null,\n\"data\": null,\n\"instance\": null,\n\"result\": null\n}"
+								},
+								"url": {
+									"raw": "{{cluster.protocol}}://{{cluster.ip}}/vinnsl/{{nn.id}}",
+									"protocol": "{{cluster.protocol}}",
+									"host": [
+										"{{cluster.ip}}"
+									],
+									"path": [
+										"vinnsl",
+										"{{nn.id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Vinnsl Json by Id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/xml",
+										"disabled": true
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"identfier\": \"5a25767b29a0612c7a94a16e\",\n\"definition\": {\n\"identfier\": null,\n\"structure\": {\n\"input\": {\n\"id\": \"input1\",\n\"dimension\": 2,\n\"size\": 1\n},\n\"output\": {\n\"id\": \"output1\",\n\"dimension\": 1,\n\"size\": 1\n},\n\"hidden\": {\n\"id\": \"hidden1\",\n\"dimension\": 5,\n\"size\": 1\n},\n\"connections\": \"connections\"\n},\n\"parameters\": {\n\"parameters\": [\n{\n\"name\": \"test\",\n\"label\": \"test1\",\n\"value\": \"value\",\n\"_class\": \"at.ac.univie.a0908270.nncloud.db.parameters.ValueParameter\"\n},\n{\n\"name\": \"test2\",\n\"label\": \"testlabel\",\n\"value\": false,\n\"_class\": \"at.ac.univie.a0908270.nncloud.db.parameters.ValueParameter\"\n}\n]\n}\n},\n\"description\": null,\n\"data\": null,\n\"instance\": null,\n\"result\": null\n}"
+								},
+								"url": {
+									"raw": "{{cluster.protocol}}://{{cluster.ip}}/vinnsl/{{nn.id}}",
+									"protocol": "{{cluster.protocol}}",
+									"host": [
+										"{{cluster.ip}}"
+									],
+									"path": [
+										"vinnsl",
+										"{{nn.id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Vinnsl ID not found",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"disabled": true
+									},
+									{
+										"key": "Accept",
+										"value": "application/xml"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"identfier\": \"5a25767b29a0612c7a94a16e\",\n\"definition\": {\n\"identfier\": null,\n\"structure\": {\n\"input\": {\n\"id\": \"input1\",\n\"dimension\": 2,\n\"size\": 1\n},\n\"output\": {\n\"id\": \"output1\",\n\"dimension\": 1,\n\"size\": 1\n},\n\"hidden\": {\n\"id\": \"hidden1\",\n\"dimension\": 5,\n\"size\": 1\n},\n\"connections\": \"connections\"\n},\n\"parameters\": {\n\"parameters\": [\n{\n\"name\": \"test\",\n\"label\": \"test1\",\n\"value\": \"value\",\n\"_class\": \"at.ac.univie.a0908270.nncloud.db.parameters.ValueParameter\"\n},\n{\n\"name\": \"test2\",\n\"label\": \"testlabel\",\n\"value\": false,\n\"_class\": \"at.ac.univie.a0908270.nncloud.db.parameters.ValueParameter\"\n}\n]\n}\n},\n\"description\": null,\n\"data\": null,\n\"instance\": null,\n\"result\": null\n}"
+								},
+								"url": {
+									"raw": "{{cluster.protocol}}://{{cluster.ip}}/vinnsl/5a8da7482283e97532423423",
+									"protocol": "{{cluster.protocol}}",
+									"host": [
+										"{{cluster.ip}}"
+									],
+									"path": [
+										"vinnsl",
+										"5a8da7482283e97532423423"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Status",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{cluster.protocol}}://{{cluster.ip}}/status/",
+									"protocol": "{{cluster.protocol}}",
+									"host": [
+										"{{cluster.ip}}"
+									],
+									"path": [
+										"status",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Status",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{cluster.protocol}}://{{cluster.ip}}/status/{{nn.id}}/INPROGRESS",
+									"protocol": "{{cluster.protocol}}",
+									"host": [
+										"{{cluster.ip}}"
+									],
+									"path": [
+										"status",
+										"{{nn.id}}",
+										"INPROGRESS"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update DL4J Desc",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"identifier\": \"\", \"problemDomain\": { \"propagationType\": { \"learningType\": \"supervised\", \"type\": \"FEEDFORWARD\" }, \"applicationField\": [], \"networkType\": \"Backpropagation\", \"problemType\": \"\" }, \"endpoints\": \"train\", \"executionEnvironment\": null, \"structure\": { \"input\": { \"id\": \"Input1\", \"dimension\": 2, \"size\": 1 }, \"hidden\": [ { \"id\": \"Hidden1\", \"dimension\": 5, \"size\": 1 } ], \"output\": { \"id\": \"Output1\", \"dimension\": 1, \"size\": 1 }, \"connections\": null }, \"resultSchema\": null, \"parameters\": null, \"data\": null, \"instanceSchemaID\": null }"
+								},
+								"url": {
+									"raw": "{{cluster.protocol}}://{{cluster.ip}}/dl4j/{{nn.id}}",
+									"protocol": "{{cluster.protocol}}",
+									"host": [
+										"{{cluster.ip}}"
+									],
+									"path": [
+										"dl4j",
+										"{{nn.id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get DL4J Desc",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"identifier\": \"\", \"problemDomain\": { \"propagationType\": { \"learningType\": \"supervised\", \"type\": \"FEEDFORWARD\" }, \"applicationField\": [], \"networkType\": \"Backpropagation\", \"problemType\": \"\" }, \"endpoints\": \"train\", \"executionEnvironment\": null, \"structure\": { \"input\": { \"id\": \"Input1\", \"dimension\": 2, \"size\": 1 }, \"hidden\": [ { \"id\": \"Hidden1\", \"dimension\": 5, \"size\": 1 } ], \"output\": { \"id\": \"Output1\", \"dimension\": 1, \"size\": 1 }, \"connections\": null }, \"resultSchema\": null, \"parameters\": null, \"data\": null, \"instanceSchemaID\": null }"
+								},
+								"url": {
+									"raw": "{{cluster.protocol}}://{{cluster.ip}}/dl4j/{{nn.id}}",
+									"protocol": "{{cluster.protocol}}",
+									"host": [
+										"{{cluster.ip}}"
+									],
+									"path": [
+										"dl4j",
+										"{{nn.id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Vinnsl by Id",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/xml",
+										"disabled": true
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"identfier\": \"5a25767b29a0612c7a94a16e\",\n\"definition\": {\n\"identfier\": null,\n\"structure\": {\n\"input\": {\n\"id\": \"input1\",\n\"dimension\": 2,\n\"size\": 1\n},\n\"output\": {\n\"id\": \"output1\",\n\"dimension\": 1,\n\"size\": 1\n},\n\"hidden\": {\n\"id\": \"hidden1\",\n\"dimension\": 5,\n\"size\": 1\n},\n\"connections\": \"connections\"\n},\n\"parameters\": {\n\"parameters\": [\n{\n\"name\": \"test\",\n\"label\": \"test1\",\n\"value\": \"value\",\n\"_class\": \"at.ac.univie.a0908270.nncloud.db.parameters.ValueParameter\"\n},\n{\n\"name\": \"test2\",\n\"label\": \"testlabel\",\n\"value\": false,\n\"_class\": \"at.ac.univie.a0908270.nncloud.db.parameters.ValueParameter\"\n}\n]\n}\n},\n\"description\": null,\n\"data\": null,\n\"instance\": null,\n\"result\": null\n}"
+								},
+								"url": {
+									"raw": "{{cluster.protocol}}://{{cluster.ip}}/vinnsl/{{nn.id}}",
+									"protocol": "{{cluster.protocol}}",
+									"host": [
+										"{{cluster.ip}}"
+									],
+									"path": [
+										"vinnsl",
+										"{{nn.id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete all ViNNSL Networks",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"disabled": true
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"identfier\": \"5a25767b29a0612c7a94a16e\",\n\"definition\": {\n\"identfier\": null,\n\"structure\": {\n\"input\": {\n\"id\": \"input1\",\n\"dimension\": 2,\n\"size\": 1\n},\n\"output\": {\n\"id\": \"output1\",\n\"dimension\": 1,\n\"size\": 1\n},\n\"hidden\": {\n\"id\": \"hidden1\",\n\"dimension\": 5,\n\"size\": 1\n},\n\"connections\": \"connections\"\n},\n\"parameters\": {\n\"parameters\": [\n{\n\"name\": \"test\",\n\"label\": \"test1\",\n\"value\": \"value\",\n\"_class\": \"at.ac.univie.a0908270.nncloud.db.parameters.ValueParameter\"\n},\n{\n\"name\": \"test2\",\n\"label\": \"testlabel\",\n\"value\": false,\n\"_class\": \"at.ac.univie.a0908270.nncloud.db.parameters.ValueParameter\"\n}\n]\n}\n},\n\"description\": null,\n\"data\": null,\n\"instance\": null,\n\"result\": null\n}"
+								},
+								"url": {
+									"raw": "{{cluster.protocol}}://{{cluster.ip}}/vinnsl/deleteall",
+									"protocol": "{{cluster.protocol}}",
+									"host": [
+										"{{cluster.ip}}"
+									],
+									"path": [
+										"vinnsl",
+										"deleteall"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Upload File to StorageService",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"value": ""
+								}
+							]
+						},
+						"url": {
+							"raw": "{{cluster.protocol}}://{{cluster.ip}}/storage/upload",
+							"protocol": "{{cluster.protocol}}",
+							"host": [
+								"{{cluster.ip}}"
+							],
+							"path": [
+								"storage",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Storage Service File List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"disabled": true
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"value": "",
+									"type": "file"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{cluster.protocol}}://{{cluster.ip}}/storage/",
+							"protocol": "{{cluster.protocol}}",
+							"host": [
+								"{{cluster.ip}}"
+							],
+							"path": [
+								"storage",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Working Queue",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{cluster.protocol}}://{{cluster.ip}}/worker/queue/",
+							"protocol": "{{cluster.protocol}}",
+							"host": [
+								"{{cluster.ip}}"
+							],
+							"path": [
+								"worker",
+								"queue",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add File to Vinnsl",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{cluster.protocol}}://{{cluster.ip}}/vinnsl/{{nn.id}}/addfile?fileId=5ab4e69c8f136a16bf81f093",
+							"protocol": "{{cluster.protocol}}",
+							"host": [
+								"{{cluster.ip}}"
+							],
+							"path": [
+								"vinnsl",
+								"{{nn.id}}",
+								"addfile"
+							],
+							"query": [
+								{
+									"key": "fileId",
+									"value": "5ab4e69c8f136a16bf81f093"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Import Datasets",
+			"item": [
+				{
+					"name": "Import Wines Dataset",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{cluster.protocol}}://{{cluster.ip}}/storage/upload?url=https://raw.githubusercontent.com/a00908270/conbexnn/master/datasets/wines.csv",
+							"protocol": "{{cluster.protocol}}",
+							"host": [
+								"{{cluster.ip}}"
+							],
+							"path": [
+								"storage",
+								"upload"
+							],
+							"query": [
+								{
+									"key": "url",
+									"value": "https://raw.githubusercontent.com/a00908270/conbexnn/master/datasets/wines.csv"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Import Iris Dataset",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{cluster.protocol}}://{{cluster.ip}}/storage/upload?url=https://raw.githubusercontent.com/a00908270/conbexnn/master/datasets/iris.txt",
+							"protocol": "{{cluster.protocol}}",
+							"host": [
+								"{{cluster.ip}}"
+							],
+							"path": [
+								"storage",
+								"upload"
+							],
+							"query": [
+								{
+									"key": "url",
+									"value": "https://raw.githubusercontent.com/a00908270/conbexnn/master/datasets/iris.txt"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "be38d799-24af-4ffc-a0a3-fe748bab9c98",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "e47d19a5-4d32-47c6-b886-45dea31b8ff8",
+				"type": "text/javascript",
+				"exec": [
+					"//set neural network id after network creation",
+					"var idUrl = postman.getResponseHeader(\"location\");",
+					"",
+					"if (idUrl) {",
+					"    console.log(\"setting id\")",
+					"    var parts = idUrl.split(\"/\");",
+					"    var id = parts[parts.length - 1];",
+					"    postman.setEnvironmentVariable(\"nn.id\", id);",
+					"    console.log(id)",
+					"}"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "4347bfcb-aa2c-4387-bd0a-b8a4deb91b15",
+			"key": "cluster.ip",
+			"value": "cluster.local",
+			"type": "string"
+		},
+		{
+			"id": "36e129e5-ca10-4dab-8038-4df5eeed823a",
+			"key": "cluster.protocol",
+			"value": "https",
+			"type": "string"
+		},
+		{
+			"id": "62161720-512f-4001-bf52-4f583d1d6afd",
+			"key": "nn.id",
+			"value": "5b2233439281fe000145ce08",
+			"type": "string"
+		}
+	]
+}
